@@ -66,6 +66,10 @@ class ComposerStaticInit542ebb3ee1796a3bb03fa9497db96901
             'Psr\\Container\\' => 14,
             'PhpParser\\' => 10,
         ),
+        'O' => 
+        array (
+            'Overtrue\\LaravelUEditor\\' => 24,
+        ),
         'M' => 
         array (
             'Monolog\\' => 8,
@@ -209,6 +213,10 @@ class ComposerStaticInit542ebb3ee1796a3bb03fa9497db96901
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'Overtrue\\LaravelUEditor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/overtrue/laravel-ueditor/src',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -336,6 +344,7 @@ class ComposerStaticInit542ebb3ee1796a3bb03fa9497db96901
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Question' => __DIR__ . '/../..' . '/app/Question.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
         'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
@@ -1953,6 +1962,12 @@ class ComposerStaticInit542ebb3ee1796a3bb03fa9497db96901
         'Monolog\\Processor\\UidProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/UidProcessor.php',
         'Monolog\\Processor\\WebProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/WebProcessor.php',
         'Monolog\\Registry' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Registry.php',
+        'Overtrue\\LaravelUEditor\\Events\\Uploaded' => __DIR__ . '/..' . '/overtrue/laravel-ueditor/src/Events/Uploaded.php',
+        'Overtrue\\LaravelUEditor\\Events\\Uploading' => __DIR__ . '/..' . '/overtrue/laravel-ueditor/src/Events/Uploading.php',
+        'Overtrue\\LaravelUEditor\\StorageManager' => __DIR__ . '/..' . '/overtrue/laravel-ueditor/src/StorageManager.php',
+        'Overtrue\\LaravelUEditor\\UEditorController' => __DIR__ . '/..' . '/overtrue/laravel-ueditor/src/UEditorController.php',
+        'Overtrue\\LaravelUEditor\\UEditorServiceProvider' => __DIR__ . '/..' . '/overtrue/laravel-ueditor/src/UEditorServiceProvider.php',
+        'Overtrue\\LaravelUEditor\\UrlResolverTrait' => __DIR__ . '/..' . '/overtrue/laravel-ueditor/src/UrlResolverTrait.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/AssertionFailedError.php',

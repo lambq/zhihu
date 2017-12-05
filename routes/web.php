@@ -19,5 +19,6 @@ Route::get('email/verify/{token}',['as' => 'email.verify', 'user' => 'EmailContr
 //Route::get('/demo', function () {
 //    return new App\Mail\RegisterValidate();
 //});
+Route::resource('questions','QuestionsController');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
