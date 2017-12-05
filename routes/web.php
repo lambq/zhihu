@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 //Route::get('email/verify/{token}','EmailController@verify');
-Route::get('email/verify/{token}',['as' => 'email.verify', 'user' => 'EmailController@verify']);
+Route::get('email/verify/{token}',['as' => 'email.verify', 'uses' => 'EmailController@verify']);
 //Route::get('/demo', function () {
 //    return new App\Mail\RegisterValidate();
 //});
