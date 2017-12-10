@@ -23,3 +23,10 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+$factory->define(App\Tapic::class, function (Faker $faker) {
+    return [
+        'name' => $faker->word,
+        'bio' => $faker->paragraphs,
+        'questions_count' => 1,
+    ];
+});

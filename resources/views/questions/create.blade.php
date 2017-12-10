@@ -20,6 +20,16 @@
                                     </span>
                                 @endif
                             </div>
+                            <div class="form-group{{ $errors->has('topic') ? ' has-error' : '' }}">
+                                <lable for="topic">话题</lable>
+                                <select class="js-example-basic-single form-control" name="topics[]" multiple="multiple">
+                                </select>
+                                @if ($errors->has('topic'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('topic') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                             <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
                                 <!-- 编辑器容器 -->
                                 <script id="container" name="body" type="text/plain">
@@ -38,6 +48,7 @@
             </div>
         </div>
     </div>
+    @section('js')
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
         var ue = UE.getEditor('container',{
@@ -54,5 +65,44 @@
         ue.ready(function() {
             ue.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
         });
+        $(document).ready(function() {
+            function formatTopic (topic) {
+                return "<div class='select2-result-repository clearfix'>" +
+                        "<div class='select2-result-repository__meta'>" +
+                        "<div class='select2-result-repository__title'>" +
+                                topic.name ? topic.name : "laravel" +
+                        "</div></div></div>";
+            }
+            function formatTopicSelection (topic) {
+                return topic.name || topic.text;
+            }
+            $('.js-example-basic-single').select2({
+                tags: true,
+                placeholder: '选择相关话题',
+                minimumInputLength: 2,
+                ajax: {
+                    url: '/api/topics',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        // Query parameters will be ?search=[term]&type=public
+                        return {
+                            q: params.term
+                        };
+                    },
+                    processResults: function (data, params) {
+                        return {
+                            results:data
+                        };
+                    },
+                    cache: true,
+                    // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+                },
+                templateResult: formatTopic,
+                templateSelection: formatTopicSelection,
+                escapeMarkup: function (markup) { return markup;},
+            });
+        });
     </script>
+    @endsection
 @endsection

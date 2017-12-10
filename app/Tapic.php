@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tapic extends Model
 {
     //
-    protected $fillable = ['name', 'questions_count'];
+    protected $title = 'Topic';
+    protected $fillable = ['name', 'questions_count','bio'];
 
     public function questions()
     {

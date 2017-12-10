@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreQuestionRequest;
+use App\Tapic;
 use Auth;
 use App\Question;
 use Illuminate\Http\Request;
@@ -42,6 +43,7 @@ class QuestionsController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
+        $topics = $this->normalizeTopic($request->get('topics'));
         $data = [
             'title' => $request->get('title'),
             'body' => $request->get('body'),
@@ -49,6 +51,7 @@ class QuestionsController extends Controller
         ];
 
         $question = Question::create($data);
+        $question->topic()->attach($topics);
 
         return redirect()->route('questions.show',[$question->id]);
     }
@@ -98,5 +101,17 @@ class QuestionsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function normalizeTopic(array $topics)
+    {
+        return collect($topics)->map(function ($topics) {
+            if(is_numeric($topics)) {
+                Tapic::find($topics)->increment('questions_count');
+                return (int) $topics;
+            }
+            $newTopic = Tapic::create(['name' => $topics,'questions_count' => 1]);
+            return $newTopic->id;
+        })->toArray();
     }
 }
