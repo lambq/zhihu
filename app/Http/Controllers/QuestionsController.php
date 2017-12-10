@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreQuestionRequest;
-use App\Tapic;
+use App\Topic;
 use Auth;
 use App\Question;
 use Illuminate\Http\Request;
@@ -107,10 +107,10 @@ class QuestionsController extends Controller
     {
         return collect($topics)->map(function ($topics) {
             if(is_numeric($topics)) {
-                Tapic::find($topics)->increment('questions_count');
+                Topic::find($topics)->increment('questions_count');
                 return (int) $topics;
             }
-            $newTopic = Tapic::create(['name' => $topics,'questions_count' => 1]);
+            $newTopic = Topic::create(['name' => $topics,'questions_count' => 1]);
             return $newTopic->id;
         })->toArray();
     }
