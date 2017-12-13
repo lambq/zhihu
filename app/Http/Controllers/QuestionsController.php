@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Repositories\QuestionRepository;
 use Auth;
-use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {
@@ -80,7 +79,10 @@ class QuestionsController extends Controller
     {
         //
         $question = $this->questionRepository->ById($id);
-        return view('questions.edit',compact('question'));
+        if(Auth::user()->owns($question)) {
+            return view('questions.edit',compact('question'));
+        }
+        return back();
     }
 
     /**
@@ -90,9 +92,18 @@ class QuestionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreQuestionRequest $request, $id)
     {
         //
+        $question = $this->questionRepository->ById($id);
+        $topics = $this->questionRepository->normalizeTopic($request->get('topics'));
+        $question->update([
+            'title' => $request->get('title'),
+            'body' => $request->get('body')
+        ]);
+        $question->topics()->sync($topics);
+
+        return redirect()->route('questions.show',[$question->id]);
     }
 
     /**

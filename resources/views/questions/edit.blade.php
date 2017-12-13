@@ -14,7 +14,7 @@
                             {!! csrf_field() !!}
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                 <lable for="title">标题</lable>
-                                <input type="text" value="{{ old('title',$question->title) }}" name="title" class="form-control" placeholder="标题">
+                                <input type="text" value="{{ old('title', $question->title) }}" name="title" class="form-control" placeholder="标题">
                                 @if ($errors->has('title'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('title') }}</strong>
@@ -24,6 +24,9 @@
                             <div class="form-group{{ $errors->has('topic') ? ' has-error' : '' }}">
                                 <lable for="topic">话题</lable>
                                 <select class="js-example-basic-single form-control" name="topics[]" multiple="multiple">
+                                    @foreach($question->topics as $topic)
+                                        <option value="{{ $topic->id }}" selected="selected">{{ $topic->name }}</option>
+                                    @endforeach
                                 </select>
                                 @if ($errors->has('topic'))
                                     <span class="help-block">
@@ -34,7 +37,7 @@
                             <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
                                 <!-- 编辑器容器 -->
                                 <script id="container" name="body" type="text/plain">
-                                    {!! old('body') !!}
+                                    {!! old('body', $question->body) !!}
                                 </script>
                                 @if ($errors->has('body'))
                                     <span class="help-block">
