@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreQuestionRequest;
-use App\Topic;
+use App\Repositories\QuestionRepository;
 use Auth;
-use App\Question;
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {
-    public function __construct()
+    protected $questionRepository;
+
+    public function __construct(QuestionRepository $questionRepository)
     {
         $this->middleware('auth')->except(['index','show']);
+        $this->questionRepository   = $questionRepository;
     }
     /**
      * Display a listing of the resource.
@@ -43,14 +45,12 @@ class QuestionsController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
-        $topics = $this->normalizeTopic($request->get('topics'));
-        $data = [
+        $topics = $this->questionRepository->normalizeTopic($request->get('topics'));
+        $question = $this->questionRepository->create([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
             'user_id' => Auth::id(),
-        ];
-
-        $question = Question::create($data);
+        ]);
         $question->topic()->attach($topics);
 
         return redirect()->route('questions.show',[$question->id]);
@@ -65,7 +65,8 @@ class QuestionsController extends Controller
     public function show($id)
     {
         //
-        $question = Question::find($id);
+        $question = $this->questionRepository->ByIdWithTopics($id);
+//        var_dump($question);die();
         return view('questions.show',compact('question'));
     }
 
@@ -78,6 +79,8 @@ class QuestionsController extends Controller
     public function edit($id)
     {
         //
+        $question = $this->questionRepository->ById($id);
+        return view('questions.edit',compact('question'));
     }
 
     /**
@@ -101,17 +104,5 @@ class QuestionsController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    private function normalizeTopic(array $topics)
-    {
-        return collect($topics)->map(function ($topics) {
-            if(is_numeric($topics)) {
-                Topic::find($topics)->increment('questions_count');
-                return (int) $topics;
-            }
-            $newTopic = Topic::create(['name' => $topics,'questions_count' => 1]);
-            return $newTopic->id;
-        })->toArray();
     }
 }

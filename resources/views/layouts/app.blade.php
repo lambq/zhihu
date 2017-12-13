@@ -54,7 +54,9 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ route('logout') }}"
+                                        <a href="/questions/create">
+                                            发表问题
+                                        </a><a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
