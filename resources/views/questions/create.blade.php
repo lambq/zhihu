@@ -20,13 +20,13 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('topic') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('topics') ? ' has-error' : '' }}">
                                 <lable for="topic">话题</lable>
                                 <select class="js-example-basic-single form-control" name="topics[]" multiple="multiple">
                                 </select>
-                                @if ($errors->has('topic'))
+                                @if ($errors->has('topics'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('topic') }}</strong>
+                                        <strong>{{ $errors->first('topics') }}</strong>
                                     </span>
                                 @endif
                             </div>
