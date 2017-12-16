@@ -15,14 +15,14 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->text('body');
-            $table->integer('user_id')->unsigned();
-            $table->integer('comments_count')->default(0);
-            $table->integer('followers_count')->default(1);
-            $table->integer('answers_count')->default(0);
-            $table->string('close_comments',8)->default('F');
-            $table->string('is_hidden',8)->default('F');
+            $table->string('title')->comment('问题标题');
+            $table->text('body')->comment('问题内容');
+            $table->integer('user_id')->unsigned()->comment('关联用户');
+            $table->integer('comments_count')->default(0)->comment('关联用户');
+            $table->integer('followers_count')->default(1)->comment('关联用户');
+            $table->integer('answers_count')->default(0)->comment('关联用户');
+            $table->string('close_comments',8)->default('F')->comment('关联用户');
+            $table->string('is_hidden',8)->default('F')->comment('关联用户');
             $table->timestamps();
         });
     }
