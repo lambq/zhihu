@@ -9,11 +9,13 @@
 
                 <div class="panel-body">
                     @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
+                        <template>
+                            <el-alert
+                                    title="{{ session('status') }}"
+                                    type="success">
+                            </el-alert>
+                        </template>
                     @endif
-
                     您已经登陆了！
                 </div>
             </div>
